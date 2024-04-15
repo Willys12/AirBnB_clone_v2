@@ -133,16 +133,16 @@ class HBNBCommand(cmd.Cmd):
                     key, val = key_value
                     key = key.replace("_", " ")
 
-                    if isinstance(val, str):
-                        if val.startswith('"') and val.endswith('"'):
-                            val = val[1:-1].replace('\\"', '"')
-                        elif "." in val:
+                    if isinstance(value, str):
+                        if value.startswith('"') and value.endswith('"'):
+                            value = value[1:-1].replace('\\"', '"')
+                        elif "." in value:
                             try:
-                                val = float(val)
+                                value = float(value)
                             except ValueError:
                                     print("Invalid parameter value for {}: {}".format
                                   (key, value))
-                            return
+                            continue
 
                     # Handle integer value
                     else:
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
                         except ValueError:
                             print("Invalid parameter value for {}: {}".format
                                   (key, value))
-                            return
+                            continue
 
                     setattr(new_instance, key, value)
 
