@@ -113,18 +113,53 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
+    
     def do_create(self, args):
-        """ Create an object of any class"""
+        """Create an object of any class with given parameters."""
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+
+        class_name, *params = args.split()
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+
+        try:
+            new_instance = HBNBCommand.classes[class_name]()
+            for param in params:
+                key_value = param.split('=')
+                if len(key_value) == 2:
+                    key, val = key_value
+                    key = key.replace("_", " ")
+
+                    if isinstance(val, str):
+                        if val.startswith('"') and val.endswith('"'):
+                            val = val[1:-1].replace('\\"', '"')
+                        elif "." in val:
+                            try:
+                                val = float(val)
+                            except ValueError:
+                                    print("Invalid parameter value for {}: {}".format
+                                  (key, value))
+                            return
+
+                    # Handle integer value
+                    else:
+                        try:
+                            value = int(value)
+                        except ValueError:
+                            print("Invalid parameter value for {}: {}".format
+                                  (key, value))
+                            return
+
+                    setattr(new_instance, key, value)
+
+            storage.save()
+            print(new_instance.id)
+        except Exception as e:
+            print("Error creating instance: {}".format(str(e)))
+                    
 
     def help_create(self):
         """ Help information for the create method """
