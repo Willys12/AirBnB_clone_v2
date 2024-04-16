@@ -35,17 +35,18 @@ Additional contributors;
 <br>
 <br>
 
-<center> <h2>Tasks to the project for Additional contributors</h2> </center>
+<center><h3>Tasks to the project for Additional contributors</h3> </center>
+
 | Tasks | Repository or Files | Description |
 | ----- | ----- | ----- |
 | 0. Fork me if you can! | [AirBnB_clone_v2](https://github.com/yahia008/AirBnB_clone_v2) | The task is to fork the project in GitHub |
 | 1. Bug free! | N/A | Unittests and The codes are compliant with pep8 documentation |
-| 2. Console improvements | [console.py] (https://github.com/yahia008/AirBnB_clone_v2/blob/master/console.py) | Creates an object of any class with given parameters. |
-| 3. MySQL setup development | [setup_mysql_dev.sql] (https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_dev.sql) | Set ALL privileges on the database `hbnb_dev_db` to the `hbnb_dev` user. |
-| 4. MySQL setup test | [setup_mysql_test.sql] (https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_test.sql) | Prepares a MySQL Test server for the project |
-| 5. Delete object | [file_storage.py] (https://github.com/yahia008/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | Delete a given object from __objects, if it exists. & Return a dictionary of instantiated objects in __objects. |
+| 2. Console improvements | [console.py](https://github.com/yahia008/AirBnB_clone_v2/blob/master/console.py) | Creates an object of any class with given parameters. |
+| 3. MySQL setup development | [setup_mysql_dev.sql](https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_dev.sql) | Set ALL privileges on the database `hbnb_dev_db` to the `hbnb_dev` user. |
+| 4. MySQL setup test | [setup_mysql_test.sql](https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_test.sql) | Prepares a MySQL Test server for the project |
+| 5. Delete object | [file_storage.py](https://github.com/yahia008/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | Delete a given object from __objects, if it exists. & Return a dictionary of instantiated objects in __objects. |
 
-| 6. DBStorage - States and Cities | [base_model.py,city.py,state.py,db_storage.py,__init__.py] () |
+| 6. DBStorage - States and Cities | [base_model.py,city.py,state.py,db_storage.py,__init__.py]() | Description |
 <br>
 <br>
 <center> <h2>General Use</h2> </center>
