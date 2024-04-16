@@ -83,8 +83,23 @@ class test_basemodel(unittest.TestCase):
 
     def test_id(self):
         """ """
+        instance = BaseModel()
         new = self.value()
         self.assertEqual(type(new.id), str)
+
+        # Check that the returned dictionary contains all the expected keys
+        dictionary = instance.to_dict()
+        self.assertIn('__class__', dictionary)
+        self.assertIn('id', dictionary)
+        self.assertIn('created_at', dictionary)
+        self.assertIn('updated_at', dictionary)
+
+        # Check that the returned dictionary does not contain the _sa_instance_state key
+        self.assertNotIn('_sa_instance_state', dictionary)
+
+        # Check that the created_at and updated_at keys are in the correct format
+        self.assertIsInstance(dictionary['created_at'], str)
+        self.assertIsInstance(dictionary['updated_at'], str)
 
     def test_created_at(self):
         """ """
@@ -98,6 +113,28 @@ class test_basemodel(unittest.TestCase):
         n = new.to_dict()
         new = BaseModel(**n)
         self.assertFalse(new.created_at == new.updated_at)
+
+    def test_delete(self):
+        """_summary_
+        """
+        instance = BaseModel()
+
+        # Check that the instance is in the storage
+        from models import storage
+        self.assertIn(instance, storage.all())
+
+        # Delete the instance
+        instance.delete()
+
+        # Check that the instance is no longer in the storage
+        self.assertNotIn(instance, storage.all())
+
+        # Check that the instance's id is no longer in the storage
+        self.assertNotIn(instance.id, storage.all().keys())
+
+        # Check that the instance's created_at and updated_at attributes are no longer in the storage
+        self.assertNotIn(instance.created_at, storage.all().values())
+        self.assertNotIn(instance.updated_at, storage.all().values())
     
 
 if __name__ == "__main__":
