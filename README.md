@@ -7,7 +7,8 @@ This repository contains the initial stage of a student project to build a clone
 <br>
 <center><h3>Additional information/AUTHORS</h3></center>
 ---
-This project was forked. Below are the names of the original Authors/contributors to it;
+This project was forked. Below are the names of the original Authors/contributors to it.
+
 * Ezra Nobrega <ezra.nobrega@outlook.com>
 * Justin Majetich <justinmajetich@gmail.com>
 

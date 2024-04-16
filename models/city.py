@@ -10,14 +10,17 @@ class City(BaseModel, Base):
     """ The city class, contains state ID and name
    
     
-       Attr:
-        state_id: The state id
-        name: input name
-        places (sqlalchemy relationship): The user-Place relationship.
+    Attr:
+    state_id: The state id
+    name: input name
+    places (sqlalchemy relationship): The user-Place relationship.
     
-       """
+    """
     
     __tablename__ = "cities"
+
+    name = Column(String(128), nullable=False)
+    state_id
 
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
