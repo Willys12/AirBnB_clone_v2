@@ -44,9 +44,10 @@ Additional contributors;
 | 2. Console improvements | [console.py](https://github.com/yahia008/AirBnB_clone_v2/blob/master/console.py) | Creates an object of any class with given parameters. |
 | 3. MySQL setup development | [setup_mysql_dev.sql](https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_dev.sql) | Set ALL privileges on the database `hbnb_dev_db` to the `hbnb_dev` user. |
 | 4. MySQL setup test | [setup_mysql_test.sql](https://github.com/yahia008/AirBnB_clone_v2/blob/master/setup_mysql_test.sql) | Prepares a MySQL Test server for the project |
-| 5. Delete object | [file_storage.py](https://github.com/yahia008/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | Delete a given object from __objects, if it exists. & Return a dictionary of instantiated objects in __objects. |
-
-| 6. DBStorage - States and Cities | [base_model.py,city.py,state.py,db_storage.py,__init__.py]() | Description |
+| 5. Delete object | [/models/engine/file_storage.py](https://github.com/yahia008/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) | Delete a given object from __objects, if it exists. & Return a dictionary of instantiated objects in __objects. |
+| 6. DBStorage - States and Cities | [/models/base_model.py, /models/city.py, /models/state.py, /models/engine/db_storage.py, /models/__init__.py]() | Description |
+| 7. DBStorage - User | [user.py]() | Description |
+| 8. DBStorage - Place | [models/place.py, user.py, city.py] | Description |
 <br>
 <br>
 <center> <h2>General Use</h2> </center>
