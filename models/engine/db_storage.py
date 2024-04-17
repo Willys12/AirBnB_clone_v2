@@ -27,17 +27,20 @@ class DBStorage:
 
     def __init__ (self):
         """Initializing DBStorage"""
-        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
-                                        format(getenv("HBNB_MYSQL_USER"),
-                                             getenv("HBNB_MYSQL_PWD"),
-                                             getenv("HBNB_MYSQL_HOST"),
-                                             getenv("HBNB_MYSQL_DB")),
-                                      pool_pre_ping=True)
+        user = getenv("HBNB_MYSQL_USER")
+        pwd = getenv("HBNB_MYSQL_PWD")
+        host = getenv("HBNB_MYSQL_HOST")
+        db = getenv("HBNB_MYSQL_DB")
+        if not all([user, pwd, host, db]):
+            raise ValueError("Missing required environment variables for database connection.")
+        
+        self.__engine = create_engine(f"mysql+mysqldb://{user}:{pwd}@{host}/{db}", pool_pre_ping=True)
         
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-    
 
+        self.reload()
+    
     def all(self, cls=None):
          """Query on the curret database session all objects of the given class.
 
@@ -47,20 +50,16 @@ class DBStorage:
             Dict of queried classes in the format <class name>.<obj id> = obj.
         """
          if cls is None:
-             objs = self.__session.query(State).all()
-             objs = self.__session.query(State).all()
-             objs.extend(self.__session.query(City).all())
-             objs.extend(self.__session.query(User).all())
-             objs.extend(self.__session.query(Place).all())
-             objs.extend(self.__session.query(Review).all())
-             objs.extend(self.__session.query(Amenity).all())
-         else:
-            if type(cls) == str:
-                cls = eval(cls)
-            objs = self.__session.query(cls)
-            return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
-     
+            classes_to_query = [User, State, City, Amenity, Place, Review]
+        else:
+            classes_to_query = [cls]
 
+        objs = []
+        for cls in classes_to_query:
+            objs.extend(self.__session.query(cls).all())
+
+        return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
+     
     def new(self, obj):
         """Adding obj to the current db session."""
         self.__session.add(obj)
