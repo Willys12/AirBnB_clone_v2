@@ -12,6 +12,6 @@
 - How to create a HTML response in Flask by using a template.
 - How to create a dynamic template (loops, conditions…)
 - How to display in HTML data from a MySQL database.
-=======
+=====
 0x04. AirBnB clone - Web framework
->>>>>>> aacb6e3b4435217ca9319bbe0f064befc031f314
+acb6e3b4435217ca9319bbe0f064befc031f314
