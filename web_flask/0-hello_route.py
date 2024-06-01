@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_flask():
-    """Provide a string as a response which is 'Hello HBNB!
+    """Provide a string as a respons which is 'Hello HBNB!
     when the route is accessed."""
     return 'Hello HBNB!'
 
