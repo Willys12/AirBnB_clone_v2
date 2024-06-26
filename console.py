@@ -113,48 +113,42 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    
     def do_create(self, args):
         """Create an object of any class with given parameters."""
-        if not args:
-            print("** class name missing **")
-            return
-
-        class_name, *params = args.split()
-        if class_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-
         try:
-            new_instance = HBNBCommand.classes[class_name]()
-            for param in params:
-                key_value = param.split('=')
-                if len(key_value) == 2:
-                    key, val = key_value
-                    key = key.replace("_", " ")
+            if not args:
+                raise SyntaxError()
+            my_list = args.split(" ")
+            dic = {}
+            for i in range(1, len(my_list)):
+                elem = my_list[i]
+                kv = elem.split('=')
+                if len(kv) == 1 or "" in kv:
+                    continue
+                if len(kv) > 1 and kv[1][0] == '"':
+                    kv[1] = kv[1].strip('"').replace('_', ' ')
+                    if kv[1].count('"') != kv[1].count('\\\"'):
+                        continue
+                    else:
+                        kv[1] = kv[1].replace('\\', '')
+                try:
+                    kv[1] = eval(kv[1])
+                except Exception as e:
+                    pass
+                if len(kv) == 2:
+                    dic[kv[0]] = kv[1]
 
-                    # Corrected the variable name from 'value' to 'val'
-                    if isinstance(val, str):
-                        if val.startswith('"'):
-                            # Removed the replace("_", " ") as it's not necessary here
-                            val = val.strip('"')
-                        else:
-                            try:
-                                val = float(val)
-                            except ValueError:
-                                print(f"Invalid parameter value for {key}: {val}")
-                                continue # Skip this parameter if it's invalid
+            if dic:
+                obj = eval("{}(**dic)".format(my_list[0]))
+            else:
+                obj = eval("{}()".format(my_list[0]))
+            obj.save()
+            print("{}".format(obj.id))
 
-                    # Corrected the syntax error and used 'val' instead of 'value'
-                    if hasattr(new_instance, key):
-                        setattr(new_instance, key, val)
-
-            storage.new(new_instance)
-            print(new_instance.id)
-            new_instance.save()
-        except Exception as e:
-            print(f"An error occurred: {e}")
-               
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
 
     def help_create(self):
         """ Help information for the create method """
@@ -349,6 +343,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
